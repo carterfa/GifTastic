@@ -1,5 +1,7 @@
 //array of animals
 let animals = ["dog", "rabbit", "black cat"];
+let gifPage = 0;
+let currentAnimal = "";
 
 //adds buttons to page
 function renderbuttons() {
@@ -31,12 +33,17 @@ function getGif() {
     //takes animal name from input entered
     let animalName = $(this).attr("data-name");
 
+    //resets page count if different animal chosen
+    if(currentAnimal != animalName){
+        gifPage = 0;
+    }
+
     //object containing parameters 
     const queryParams = {
         "api_key": "CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2",
         q: animalName,
         "limit": 10,
-        "offset": 0,
+        "offset": gifPage,
         "rating": "G",
         "lang": "en"
     };
@@ -59,6 +66,11 @@ function getGif() {
 
         }
 
+        //loads different gifs on next click
+        gifPage += 10;
+
+        //sets current animal
+        currentAnimal = animalName;
 
     })
 }
@@ -68,10 +80,10 @@ function stopStartGif() {
     let imageURL = $(this).attr("src");
     //amends image url to either still or active version
     if (imageURL.includes("200w_s")) {
-        imageURL = imageURL.replace("200w_s", "200w");
+        imageURL = imageURL.replace(/200w_s/g, "200w");
     }
     else {
-        imageURL = imageURL.replace("200w", "200w_s")
+        imageURL = imageURL.replace(/200w/g, "200w_s")
     }
     //changes attribute in the DOM
     $(this).attr("src", imageURL)
@@ -97,7 +109,13 @@ $(document).ready(function () {
             add(newAnimal);
         }
 
+        $("#animalInput").val("");
 
+
+    })
+
+    $("#clearBtn").on("click", function (){
+        $("#gifRow").empty();
     })
 
     //searches for gifs on user click
