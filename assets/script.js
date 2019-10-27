@@ -27,17 +27,22 @@ function add(newAnimal) {
 
 }
 
-function getGif(){
+function getGif() {
     let animalName = $(this).attr("data-name");
-    let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2&q="+animalName+"&limit=10&offset=0&rating=G&lang=en"
+    let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=CbRv29mIUSwkTAVauYUvcQ8lOGyxCop2&q=" + animalName + "&limit=10&offset=0&rating=G&lang=en"
 
     $.ajax({
         url: queryURL,
         Method: "GET"
-    }).then (function (response) {
+    }).then(function (response) {
+        console.log(response);
 
-        console.log(response.data[0].images.downsized.url);
+        for (let i = 0; i < response.data.length; i++) {
+            const gifContent = `<div>
+            ${"<img src=" + response.data[i].images.fixed_width_still.url + "/>"}</div>`
+            $("#gifRow").prepend(gifContent);
 
+        }
 
 
     })
