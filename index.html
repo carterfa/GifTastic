@@ -14,15 +14,15 @@
 
 <body>
     <!-- Section where buttons are added -->
-    <header id="buttonBar"></header>
+    <nav id="buttonBar"></nav>
     <!-- Section for submission of new animal -->
-    <div>
+    <header>
         <form>
-            <input type="text" id="animalInput" onfocus="this.value=''" value="Add an Animal">
-            <input type="submit" id="addAnimal" value="SUBMIT">
-            <input type="submit" id="clearBtn" value="REMOVE ALL GIFS">
+            <input class="form-control-plaintext" type="text" id="animalInput" onfocus="this.value=''" value="Add an Animal">
+            <button class="btn btn-secondary" id="addAnimal">SUBMIT</button>
+            <button class="btn btn-danger" id="clearBtn">REMOVE ALL GIFS</button>
         </form>
-    </div>
+    </header>
     <!-- Section where gifs are added. -->
     <div class="container"><div class="row" id="gifRow"></div></div>
     <!-- Links to jquery and javascript file -->

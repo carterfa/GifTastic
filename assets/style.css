@@ -1,8 +1,32 @@
+body {
+    background: gainsboro;
+}
+
+#buttonBar{
+    margin: .5em;
+}
+
+.animalBtn{
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
 .container {
     margin-left: auto;
     margin-right: auto;
 }
 
-#clearBtn {
-    float: right;
+.form-control-plaintext{
+    width: 25%;
+    float: left;
+    background-color: white;
+}
+
+#animalInput{
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+header{
+    margin-bottom: 1em;
 }

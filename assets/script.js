@@ -1,5 +1,5 @@
 //array of animals
-let animals = ["dog", "rabbit", "black cat"];
+let animals = ["dog", "rabbit", "cat", "fish"];
 let gifPage = 0;
 let currentAnimal = "";
 
@@ -14,7 +14,7 @@ function renderbuttons() {
         //adds button to section
         $("#buttonBar").append(animalBtn);
         //gives button class and unique attribute
-        animalBtn.attr("class", "animalBtn");
+        animalBtn.attr("class", "btn btn-primary animalBtn");
         animalBtn.attr("data-name", animals[i])
     }
 }
@@ -60,8 +60,10 @@ function getGif() {
         console.log(response);
         //creates image div for each item in response
         for (let i = 0; i < response.data.length; i++) {
-            const gifContent = `<div class="col-2.4">
-            ${"<img src=" + response.data[i].images.fixed_width_still.url + "/>"}</div>`
+            const gifContent = `<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            ${"<img src=" + response.data[i].images.fixed_width_still.url + "/>"}
+            ${"<p>Title: "+ response.data[i].title}
+            ${"<p>Rating: "+ response.data[i].rating.toUpperCase()}</div>`
             $("#gifRow").prepend(gifContent);
 
         }
@@ -105,7 +107,7 @@ $(document).ready(function () {
         let newAnimal = $("#animalInput").val().trim();
 
         //prevents user from adding blank button
-        if (newAnimal) {
+        if (newAnimal && newAnimal != "Add an Animal") {
             add(newAnimal);
         }
 
@@ -115,6 +117,9 @@ $(document).ready(function () {
     })
 
     $("#clearBtn").on("click", function (){
+        //prevents page from refreshing
+        event.preventDefault();
+
         $("#gifRow").empty();
     })
 
